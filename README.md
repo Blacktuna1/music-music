@@ -16,7 +16,8 @@
 目前的想法是已自己听音乐的习惯来设计这个界面，因此布局都是以自己的喜好为主
 </p>
 
-
-npm install
-npm run serve
-npm run build
+#### 使用方法
+ps:Node.js版本为12.13.1<br>
+npm install<br>
+npm run serve<br>
+npm run build<br>
