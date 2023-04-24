@@ -1,43 +1,35 @@
 {
   "name": "music-music",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "author": "Ken Z",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "core-js": "^3.8.3",
-    "vue": "^2.6.14"
+    "axios": "^0.21.1",
+    "core-js": "^3.12.1",
+    "element": "^0.1.4",
+    "element-ui": "^2.15.1",
+    "less": "^4.1.1",
+    "less-loader": "^5.0.0",
+    "vue": "^2.6.12",
+    "vue-router": "^3.5.1",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.16",
-    "@babel/eslint-parser": "^7.12.16",
-    "@vue/cli-plugin-babel": "~5.0.0",
-    "@vue/cli-plugin-eslint": "~5.0.0",
-    "@vue/cli-service": "~5.0.0",
-    "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3",
-    "vue-template-compiler": "^2.6.14"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "@babel/eslint-parser"
-    },
-    "rules": {}
+    "@vue/cli-plugin-babel": "^4.5.13",
+    "@vue/cli-plugin-router": "^5.0.8",
+    "@vue/cli-plugin-vuex": "^5.0.8",
+    "@vue/cli-service": "^4.5.13",
+    "vue-template-compiler": "^2.6.12"
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "license": "MIT"
 }
