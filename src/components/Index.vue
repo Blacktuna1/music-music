@@ -11,9 +11,11 @@
             <i class="iconfont icon-yinle"></i>
             <span slot="title"></span>
           </el-menu-item>
-          <el-menu-item index="/favorites">
-            <i class="iconfont icon-xiai" ></i>
-            <span slot="title"></span>
+          <el-menu-item
+            v-if="createdMusicList.length != 0"
+            :index="`/musiclistdetail/${likeId}`">
+              <i class="iconfont icon-xiai"></i>
+              <span slot="title"></span>
           </el-menu-item>
           <el-menu-item index="/album">
             <i class="iconfont icon-24gf-videoAlbum"></i>
@@ -43,16 +45,54 @@ export default {
     data(){
         return{
             defaultActive: "",
+            createdMusicList:[],
+            collectedMusicList:[],
+            likeId:"",
         };
+    },
+    methods:{
+      async getUserMusicList() {
+        if (!this.$store.state.isLogin) {
+          // 说明已经退出登录
+          this.$message.error("请先进行登录操作");
+          return;
+        }
+        let timestamp = Date.parse(new Date());
+        // 先从localStorage里面读取用户信息  如果登录成功是有存的
+        // this.userInfo =
+        //   window.localStorage.getItem("userInfo") &&
+        //   JSON.parse(window.localStorage.getItem("userInfo"));
+
+        let res = await this.$request("/user/playlist", {
+          uid: window.localStorage.getItem("userId"),
+          timestamp,
+        });
+        // console.log(res);
+        // 对数据进行处理分类
+        res = res.data.playlist;
+        let index = res.findIndex((item) => item.subscribed == true);
+        this.createdMusicList = res.slice(0, index);
+        this.collectedMusicList = res.slice(index);
+        this.createdMusicList[0].name = "我喜欢的音乐";
+        this.likeId=this.createdMusicList[0].id;
+        // console.log(this.createdMusicList, this.collectedMusicList);
+        // 将收藏的歌单上传至vuex
+        this.$store.commit("updateCollectMusicList", this.collectedMusicList);
+        // 将创建的歌单上传至vuex
+        this.$store.commit("updateCreatedMusicList", this.createdMusicList);
+      },
     },
     created() {
         if (this.$route.path.search("/musiclistdetail") == -1) {
-        this.defaultActive = "/" + this.$route.path.split("/")[1];
+          this.defaultActive = "/" + this.$route.path.split("/")[1];
         } else {
-        this.defaultActive = this.$route.path;
+          this.defaultActive = this.$route.path;
         }
     },
     watch:{
+        "$store.state.collectedMusicList"(current){
+            this.collectedMusicList=current
+        },
         "$route.path"(current) {
             // 取路由中的首地址 用于侧边栏的导航active
             if (current.search("/musiclistdetail") == -1) {
@@ -61,6 +101,18 @@ export default {
                 this.defaultActive = current;
             }
             // console.log(current, this.defaultActive);
+        },
+            // 监听vuex中的登录状态
+        "$store.state.isLogin"(current) {
+          // console.log(current);
+          if (current) {
+            this.getUserMusicList();
+          } else {
+            // 清空收藏和创建歌单
+            this.createdMusicList = [];
+            this.collectedMusicList = [];
+
+          }
         },
     }
 }

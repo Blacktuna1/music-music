@@ -101,14 +101,14 @@
           placement="left"
           :enterable="false"
         >
-          <div v-html="recondInfo" slot="content"></div>
-          <el-link
+          <!-- <div v-html="recondInfo" slot="content"></div> -->
+          <!-- <el-link
             type="info"
             href="https://beian.miit.gov.cn/"
             target="_blank"
             class="recondInfo"
             ></el-link
-          >
+          > -->
         </el-tooltip>
       </div>
       <div class="right-two">
@@ -762,14 +762,14 @@
     bottom: 5px;
   }
   
-  .recondInfo {
+  /* .recondInfo {
     position: absolute;
     font-size: 12px;
     transform: scale(0.8);
     width: 140px;
     right: -5px;
     bottom: -5px;
-  }
+  } */
   
   .center .icon-suiji1 {
     font-size: 15px;

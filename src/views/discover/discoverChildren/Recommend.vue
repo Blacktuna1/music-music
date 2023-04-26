@@ -90,7 +90,7 @@ export default {
 }
 
 .recommendMusicList {
-  margin: 20px 10px;
+  margin: 20px 20px;
 }
 
 .recommendMusicList h3 {

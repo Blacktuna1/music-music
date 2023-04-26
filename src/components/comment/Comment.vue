@@ -3,7 +3,7 @@
     <div
       class="comments"
       v-if="commentType != '' && commentType != 'music' && isHotComment"
-    >
+      >
       <el-input
         type="textarea"
         class="commentArea"

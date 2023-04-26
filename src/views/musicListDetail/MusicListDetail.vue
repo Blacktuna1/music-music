@@ -47,6 +47,18 @@
             <span>分享</span>
           </div>
         </div>
+        <!-- 标签 -->
+        <div class="tags">
+          标签：
+          <div
+            class="tagItem"
+            v-for="(item, index) in musicListDetail.tags"
+            :key="index"
+          >
+            {{ item }}
+          </div>
+          <div v-if="musicListDetail.tags.length == 0">暂无标签</div>
+        </div>
         <!-- 歌曲列表的歌曲数量和播放量 -->
         <div class="otherInfo">
           <div class="musicNum">
@@ -55,6 +67,14 @@
           <div class="playCount">
             播放 : {{ musicListDetail.playCount | handleNum }}
           </div>
+        </div>
+        <div class="desc">
+          简介 :
+          {{
+            musicListDetail.description
+              ? musicListDetail.description
+              : "暂无简介"
+          }}
         </div>
       </div>
     </div>
@@ -712,7 +732,7 @@ export default {
   font-size: 12px;
   padding: 8px 15px;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 20px;
   transform: scale(0.9);
 }
 
@@ -723,7 +743,7 @@ export default {
 }
 
 .playAll {
-  background-color: #fa2d48;
+  background-color: #ec4141;
   color: white;
 }
 
